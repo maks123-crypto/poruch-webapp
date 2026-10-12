@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Поруч — казки</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Library: list of recent stories -->
+  <main id="library" class="view">
+    <header class="app-header">
+      <div class="app-title">🌙 Поруч</div>
+      <div class="app-subtitle">Казки вашим голосом</div>
+    </header>
+    <section class="story-list" id="story-list"></section>
+  </main>
+
+  <!-- Reader: comfortable full-screen reading -->
+  <main id="reader" class="view" hidden>
+    <header class="reader-bar">
+      <div class="reader-bar-row">
+        <button class="bar-btn" id="back-btn" aria-label="Назад">←</button>
+        <div class="font-controls">
+          <button class="bar-btn" id="font-minus" aria-label="Менший шрифт">A−</button>
+          <button class="bar-btn" id="font-plus" aria-label="Більший шрифт">A+</button>
+          <button class="bar-btn" id="settings-btn" aria-label="Вигляд">Аа</button>
+        </div>
+      </div>
+      <div class="reader-settings" id="reader-settings" hidden>
+        <div class="settings-row">
+          <span class="settings-label">Тема</span>
+          <div class="theme-buttons">
+            <button class="theme-btn theme-btn-night" data-theme="night" aria-label="Нічна тема">🌙</button>
+            <button class="theme-btn theme-btn-sepia" data-theme="sepia" aria-label="Сепія">📜</button>
+            <button class="theme-btn theme-btn-day" data-theme="day" aria-label="Денна тема">☀️</button>
+          </div>
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Освітлення</span>
+          <input type="range" id="brightness" min="55" max="100" step="5" aria-label="Яскравість" />
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Інтервал</span>
+          <div class="theme-buttons">
+            <button class="bar-btn" id="line-tight" aria-label="Щільніше">▭</button>
+            <button class="bar-btn" id="line-loose" aria-label="Просторіше">☰</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="dim-overlay" id="dim-overlay"></div>
+    <article class="story">
+      <h1 id="story-title"></h1>
+      <div class="story-meta" id="story-meta"></div>
+      <div id="story-text"></div>
+      <footer class="story-footer">
+        <div class="brand-line">Я поруч. Добраніч 🌙</div>
+      </footer>
+    </article>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

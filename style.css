@@ -1,0 +1,151 @@
+/* Poruch Mini App — bedtime reading theme.
+   Dark warm palette matched to the pitch deck (bg #0E1020, amber #F5B544).
+   Telegram theme vars override where present; the amber accent stays ours. */
+:root {
+  --bg: var(--tg-theme-bg-color, #0e1020);
+  --bg-card: var(--tg-theme-secondary-bg-color, #181b30);
+  --text: var(--tg-theme-text-color, #e8e6df);
+  --muted: var(--tg-theme-hint-color, #8e92a8);
+  --accent: #f5b544;
+  --reader-font-size: 20px;
+  --reader-line-height: 1.65;
+}
+
+/* Reader themes: the reader view keeps its own palette regardless of Telegram's. */
+body[data-reader-theme='night'] {
+  --bg: #0e1020;
+  --bg-card: #181b30;
+  --text: #e8e6df;
+  --muted: #8e92a8;
+}
+body[data-reader-theme='sepia'] {
+  --bg: #f4e8d4;
+  --bg-card: #ebdcc2;
+  --text: #43351f;
+  --muted: #8a7a5e;
+}
+body[data-reader-theme='day'] {
+  --bg: #f7f7f9;
+  --bg-card: #ececf1;
+  --text: #22232b;
+  --muted: #7b7e8c;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+.view { min-height: 100vh; padding: 16px; padding-bottom: 40px; }
+[hidden] { display: none !important; }
+
+/* ---------- Library ---------- */
+.app-header { text-align: center; padding: 24px 0 20px; }
+.app-title { font-size: 28px; font-weight: 700; letter-spacing: 0.5px; }
+.app-subtitle { color: var(--muted); margin-top: 6px; font-size: 14px; }
+
+.story-list { display: flex; flex-direction: column; gap: 10px; max-width: 560px; margin: 0 auto; }
+
+.story-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--bg-card);
+  border: 1px solid rgba(245, 181, 68, 0.12);
+  border-radius: 14px;
+  padding: 14px 16px;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.story-card:active { border-color: var(--accent); }
+.story-card .card-title { font-size: 16px; font-weight: 600; }
+.story-card .card-meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+/* ---------- Reader ---------- */
+.reader-bar {
+  position: sticky;
+  top: 0;
+  padding: 8px 0 12px;
+  background: linear-gradient(var(--bg) 85%, transparent);
+  z-index: 2;
+}
+.reader-bar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reader-settings {
+  max-width: 560px;
+  margin: 10px auto 0;
+  background: var(--bg-card);
+  border: 1px solid rgba(245, 181, 68, 0.18);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.settings-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.settings-label { color: var(--muted); font-size: 14px; }
+.theme-buttons { display: flex; gap: 8px; }
+.theme-btn {
+  width: 44px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(245, 181, 68, 0.18);
+  font-size: 17px;
+  cursor: pointer;
+}
+.theme-btn-night { background: #0e1020; }
+.theme-btn-sepia { background: #f4e8d4; }
+.theme-btn-day { background: #f7f7f9; }
+.theme-btn.active { border: 2px solid var(--accent); }
+#brightness { flex: 1; accent-color: var(--accent); min-height: 40px; }
+
+/* Brightness: a dimming veil above the content, below the controls' z-order feel. */
+.dim-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+.font-controls { display: flex; gap: 8px; }
+.bar-btn {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid rgba(245, 181, 68, 0.18);
+  border-radius: 10px;
+  min-width: 44px;
+  min-height: 40px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.bar-btn:active { border-color: var(--accent); color: var(--accent); }
+
+.story { max-width: 560px; margin: 0 auto; }
+.story h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: calc(var(--reader-font-size) * 1.35);
+  line-height: 1.3;
+  margin: 8px 0 4px;
+}
+.story-meta { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+
+#story-text {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: var(--reader-font-size);
+  line-height: var(--reader-line-height);
+}
+#story-text p { margin: 0 0 1em; }
+
+.story-footer { margin-top: 36px; padding-bottom: 24px; text-align: center; }
+.brand-line { color: var(--accent); font-size: 15px; }
