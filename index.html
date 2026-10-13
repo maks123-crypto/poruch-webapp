@@ -8,6 +8,13 @@
   <meta property="og:title" content="Поруч — казка голосом тата, який далеко" />
   <meta property="og:description" content="Щовечора нова казка для вашої дитини голосом рідної людини. Перші 500 родин — безкоштовно." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://maks123-crypto.github.io/poruch-webapp/" />
+  <meta property="og:image" content="https://maks123-crypto.github.io/poruch-webapp/og.png" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="720" />
+  <meta property="og:locale" content="uk_UA" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="alternate" hreflang="en" href="https://maks123-crypto.github.io/poruch-webapp/en/" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -72,6 +79,18 @@
     .logo svg { width: 30px; height: 30px; }
     .nav-cta { font-weight: 700; font-size: 15px; text-decoration: none; color: var(--amber); border: 1px solid var(--line); padding: 10px 16px; border-radius: 999px; }
     .nav-cta:hover { background: rgba(245,181,68,0.08); }
+    .lang { text-decoration: none; color: var(--muted); font-weight: 700; font-size: 14px; padding: 10px 12px; border-radius: 999px; }
+    .lang:hover { color: var(--ink); }
+
+    /* faq */
+    .faq { max-width: 760px; }
+    .faq details { border-top: 1px solid rgba(255,255,255,0.08); padding: 18px 0; }
+    .faq details:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; align-items: center; font-weight: 700; font-size: 17px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; color: var(--amber); font-family: 'Unbounded'; font-size: 20px; flex: none; transition: transform .2s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq p { margin: 12px 0 0; color: var(--muted); font-size: 16px; }
 
     /* ---------- hero ---------- */
     .hero { padding: 56px 0 40px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; }
@@ -178,7 +197,10 @@
         <svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#f5b544"/></linearGradient></defs><path d="M30 6a18 18 0 1 0 12 31.5A14 14 0 1 1 30 6z" fill="url(#g1)"/><path d="M12 13l1.4 3.2L16.6 17.6l-3.2 1.4L12 22.2l-1.4-3.2L7.4 17.6l3.2-1.4z" fill="#efece4"/></svg>
         Поруч
       </a>
-      <a class="nav-cta" href="https://t.me/+__FWYzw4QDE1MWI0" target="_blank" rel="noopener">Ранній доступ</a>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="lang" href="en/" aria-label="English version">EN</a>
+        <a class="nav-cta" href="https://t.me/+__FWYzw4QDE1MWI0" target="_blank" rel="noopener">Ранній доступ</a>
+      </div>
     </nav>
 
     <header class="hero">
@@ -268,6 +290,18 @@
           <p>Я Максим. Ми будуємо «Поруч» удвох із другом-програмістом, власним коштом і відкрито: у каналі показуємо все, що виходить і що ні. Голос копіюємо тільки за згодою його власника. Це не заміна тата. Це спосіб бути поруч, коли не можеш бути.</p>
           <div class="who">Максим, співзасновник «Поруч»</div>
         </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Питання, які ставлять найчастіше</h2>
+      <div class="faq">
+        <details><summary>Це безпечно — віддавати свій голос?</summary><p>Голос копіюється лише за згодою його власника і використовується тільки для казок вашій дитині. Видалити голос можна будь-коли однією кнопкою в боті, і ми його не зберігаємо далі.</p></details>
+        <details><summary>Чи не замінить це живого тата?</summary><p>Ні, і ми цього не хочемо. Найкраща казка — та, яку розповідають, обійнявши. «Поруч» для тих вечорів, коли обійняти неможливо: рейс, служба, кордон.</p></details>
+        <details><summary>Скільки це коштує?</summary><p>Перші 500 родин отримують доступ безкоштовно. Далі буде підписка дешевша за одну дитячу книжку на місяць. Для родин військових плануємо безкоштовну лінію разом із фондами-партнерами.</p></details>
+        <details><summary>Що потрібно, щоб почати?</summary><p>Telegram і дві хвилини, щоб записати голос. Жодних застосунків, реєстрацій чи карток.</p></details>
+        <details><summary>Для якого віку казки?</summary><p>Від 2 до 10 років. Довжина, слова і сюжет підлаштовуються під вік, а казка знає імʼя дитини, що вона любить і чого боїться.</p></details>
+        <details><summary>Якою мовою?</summary><p>Українською. Є й англійська для родин за кордоном. Російської немає і не буде.</p></details>
       </div>
     </section>
 
