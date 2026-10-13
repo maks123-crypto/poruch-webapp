@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Poruch — a bedtime story in Dad's own voice, from far away</title>
+  <title>Poruch — a bedtime story in a parent's own voice, from far away</title>
   <meta name="description" content="Poruch writes a new bedtime story for your child every evening and reads it in Dad's or Mom's own voice, even when they are deployed, on the road, or abroad." />
-  <meta property="og:title" content="Poruch — a bedtime story in Dad's own voice" />
+  <meta property="og:title" content="Poruch — a bedtime story in a parent's own voice" />
   <meta property="og:description" content="A new bedtime story every evening in a parent's own voice. The first 500 families get it free." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://maks123-crypto.github.io/poruch-webapp/en/" />
@@ -97,6 +97,8 @@
     .kicker { color: var(--amber); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 12.5px; margin-bottom: 18px; }
     h1 { font-size: clamp(34px, 5.2vw, 60px); line-height: 1.08; margin: 0 0 20px; }
     h1 em { font-style: normal; color: var(--amber-2); }
+    .rot { display: inline-block; transition: opacity .35s ease, transform .35s ease; }
+    .rot.out { opacity: 0; transform: translateY(8px); }
     .lead { font-size: clamp(17px, 1.6vw, 20px); color: #cfd0dc; max-width: 560px; margin: 0 0 30px; }
     .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
     .btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; padding: 15px 24px; border-radius: 999px; font-size: 16px; transition: transform .15s ease, box-shadow .15s ease; }
@@ -206,8 +208,8 @@
     <header class="hero">
       <div>
         <div class="kicker">Bedtime stories in a parent's voice · for families apart</div>
-        <h1>Dad is far away.<br />The story is <em>in his voice.</em></h1>
-        <p class="lead">Poruch writes a new bedtime story for your child every evening and reads it in Dad's or Mom's own voice, even when they are deployed, on the road, or working abroad.</p>
+        <h1><span class="rot" data-words="Dad|Mom|Grandma|Grandpa">Dad</span> is far away.<br />The story is <em>in their own voice.</em></h1>
+        <p class="lead">Poruch writes a new bedtime story for your son or daughter every evening and reads it in Mom's, Dad's or Grandma's own voice, even when they are deployed, on the road, or working abroad.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="https://t.me/+__FWYzw4QDE1MWI0" target="_blank" rel="noopener">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L3 10.5l7.5 3L13.5 21z"/></svg>
@@ -237,7 +239,7 @@
 
     <section id="demo">
       <h2 class="section-title">This is what it sounds like</h2>
-      <p class="section-sub">The voice is a real dad's, cloned from a two-minute recording. The story was written for a six-year-old boy who loves motorcycles and is afraid of the dark. It is in Ukrainian; English stories sound just as warm.</p>
+      <p class="section-sub">The voice is a real dad's, cloned from a two-minute recording. The story was written for a six-year-old boy who loves motorcycles and is afraid of the dark. For a daughter the story is about her: her name, her favorites, her fears. It is in Ukrainian; English stories sound just as warm.</p>
       <div class="demo-card" id="demo-card">
         <button class="play" id="play" aria-label="Play demo">
           <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -260,7 +262,7 @@
       <div class="steps">
         <div class="step"><div class="n">STEP 1</div><h3>Record two minutes of your voice</h3><p>Read a short text the way you would read to your child. As you are: with breath, with a smile, no announcer voice.</p></div>
         <div class="step"><div class="n">STEP 2</div><h3>Tell us about your child</h3><p>Name, age, the pet name you use at home. What they love, what scares them, what is coming up: kindergarten, a doctor, a move.</p></div>
-        <div class="step"><div class="n">STEP 3</div><h3>A new story every evening</h3><p>Within a minute the text and the audio arrive, in your voice. Your child hears you. You know you were there.</p></div>
+        <div class="step"><div class="n">STEP 3</div><h3>A new story every evening</h3><p>Within a minute the text and the audio arrive, in your voice. Your child hears someone they love. And you know you were there.</p></div>
       </div>
     </section>
 
@@ -268,7 +270,7 @@
       <h2 class="section-title">Who we build this for</h2>
       <p class="section-sub">For every family where the bedtime story became rare through no choice of their own.</p>
       <div class="aud">
-        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h3>Military families</h3><p>Dad is deployed, and the story still comes every night. No promises we cannot keep. Just the voice a child knows.</p></div></div>
+        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h3>Military families</h3><p>Mom or Dad is deployed, and the story still comes every night. No promises we cannot keep. Just the voice a child knows.</p></div></div>
         <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 15h13l3-5h2v5"/><path d="M3 15V8h10v7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div><div><h3>Truckers, sailors, shift workers</h3><p>You call at half past nine and the little one is already asleep. Now they fall asleep to your voice.</p></div></div>
         <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></div><div><h3>Working abroad and the diaspora</h3><p>Mom is in Poland or Germany, the child is with grandma. A story in her voice, in their language, at the usual time.</p></div></div>
         <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div><div><h3>Parents living apart</h3><p>Your evening with your child, even on a week that is not yours. No nine o'clock calls when everyone is tired.</p></div></div>
@@ -287,7 +289,7 @@
       <div class="founder">
         <div class="avatar">M</div>
         <div>
-          <p>I'm Maksym. We are building Poruch as two friends, self-funded and in the open: our channel shows what works and what does not. A voice is cloned only with its owner's consent. This is not a replacement for Dad. It is a way to be close when you cannot be there.</p>
+          <p>I'm Maksym. We are building Poruch as two friends, self-funded and in the open: our channel shows what works and what does not. A voice is cloned only with its owner's consent. This is not a replacement for Mom or Dad. It is a way to be close when you cannot be there.</p>
           <div class="who">Maksym, co-founder of Poruch</div>
         </div>
       </div>
@@ -297,7 +299,7 @@
       <h2 class="section-title">Questions parents ask most</h2>
       <div class="faq">
         <details><summary>Is it safe to hand over my voice?</summary><p>The voice is cloned only with its owner's consent and used only for stories for your child. You can delete it any time with one button in the bot, and we do not keep it afterwards.</p></details>
-        <details><summary>Will this replace a real dad?</summary><p>No, and we do not want it to. The best story is the one told with a hug. Poruch is for the evenings when a hug is impossible: a voyage, a deployment, a border.</p></details>
+        <details><summary>Will this replace a real parent?</summary><p>No, and we do not want it to. The best story is the one told with a hug. Poruch is for the evenings when a hug is impossible: a voyage, a deployment, a border.</p></details>
         <details><summary>How much does it cost?</summary><p>The first 500 families get it free. After that, a subscription cheaper than one children's book a month. For military families we are planning a free line together with partner foundations.</p></details>
         <details><summary>What do I need to start?</summary><p>Telegram and two minutes to record your voice. No apps, sign-ups, or cards.</p></details>
         <details><summary>What ages are the stories for?</summary><p>Ages 2 to 10. Length, words, and plot adapt to the age, and the story knows your child's name, what they love, and what they fear.</p></details>

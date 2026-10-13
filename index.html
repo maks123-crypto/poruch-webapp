@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Поруч — казка голосом тата, який далеко</title>
+  <title>Поруч — казка голосом рідних, які далеко</title>
   <meta name="description" content="«Поруч» щовечора створює нову казку для вашої дитини і читає її голосом тата чи мами — навіть коли вони на службі, у рейсі чи за кордоном." />
-  <meta property="og:title" content="Поруч — казка голосом тата, який далеко" />
+  <meta property="og:title" content="Поруч — казка рідним голосом, навіть здалеку" />
   <meta property="og:description" content="Щовечора нова казка для вашої дитини голосом рідної людини. Перші 500 родин — безкоштовно." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://maks123-crypto.github.io/poruch-webapp/" />
@@ -97,6 +97,8 @@
     .kicker { color: var(--amber); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 12.5px; margin-bottom: 18px; }
     h1 { font-size: clamp(34px, 5.2vw, 60px); line-height: 1.08; margin: 0 0 20px; }
     h1 em { font-style: normal; color: var(--amber-2); }
+    .rot { display: inline-block; transition: opacity .35s ease, transform .35s ease; }
+    .rot.out { opacity: 0; transform: translateY(8px); }
     .lead { font-size: clamp(17px, 1.6vw, 20px); color: #cfd0dc; max-width: 560px; margin: 0 0 30px; }
     .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
     .btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; padding: 15px 24px; border-radius: 999px; font-size: 16px; transition: transform .15s ease, box-shadow .15s ease; }
@@ -205,9 +207,9 @@
 
     <header class="hero">
       <div>
-        <div class="kicker">Казки голосом рідних · для родин на відстані</div>
-        <h1>Тато далеко.<br />Казка — <em>його голосом.</em></h1>
-        <p class="lead">«Поруч» щовечора створює нову казку для вашої дитини і читає її голосом тата чи мами, навіть коли вони на службі, у рейсі чи за кордоном.</p>
+        <div class="kicker">Казки голосом мами, тата, бабусі · для родин на відстані</div>
+        <h1><span class="rot" data-words="Тато|Мама|Бабуся|Дідусь">Тато</span> далеко.<br />Казка — <em>рідним голосом.</em></h1>
+        <p class="lead">«Поруч» щовечора створює нову казку для вашого сина чи доньки і читає її голосом мами, тата чи бабусі, навіть коли вони на службі, у рейсі чи за кордоном.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="https://t.me/+__FWYzw4QDE1MWI0" target="_blank" rel="noopener">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L3 10.5l7.5 3L13.5 21z"/></svg>
@@ -237,7 +239,7 @@
 
     <section id="demo">
       <h2 class="section-title">Ось так це звучить</h2>
-      <p class="section-sub">Голос у записі — справжнього тата, скопійований із двохвилинного запису. Казка написана для хлопчика шести років, який любить мотоцикли й боїться темряви.</p>
+      <p class="section-sub">Голос у записі — справжнього тата, скопійований із двохвилинного запису. Казка написана для хлопчика шести років, який любить мотоцикли й боїться темряви. Для доньки казка буде про неї: з її ім'ям, її улюбленим і її страхами.</p>
       <div class="demo-card" id="demo-card">
         <button class="play" id="play" aria-label="Відтворити демо">
           <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -260,7 +262,7 @@
       <div class="steps">
         <div class="step"><div class="n">КРОК 1</div><h3>Запишіть дві хвилини голосу</h3><p>Прочитайте короткий текст, як читали б дитині. Так, як є: з диханням, з усмішкою, без дикторства.</p></div>
         <div class="step"><div class="n">КРОК 2</div><h3>Розкажіть про дитину</h3><p>Ім'я, вік, як кличуть удома. Що любить, чого боїться, що скоро чекає: садочок, лікар, переїзд.</p></div>
-        <div class="step"><div class="n">КРОК 3</div><h3>Щовечора нова казка</h3><p>За хвилину приходить текст і озвучка вашим голосом. Дитина чує тата. Тато знає, що був поруч.</p></div>
+        <div class="step"><div class="n">КРОК 3</div><h3>Щовечора нова казка</h3><p>За хвилину приходить текст і озвучка вашим голосом. Дитина чує рідну людину. А ви знаєте, що були поруч.</p></div>
       </div>
     </section>
 
@@ -268,10 +270,10 @@
       <h2 class="section-title">Для кого ми це робимо</h2>
       <p class="section-sub">Для всіх, у кого вечірня казка стала рідкістю не з власної волі.</p>
       <div class="aud">
-        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h3>Родини військових</h3><p>Тато на службі, а казка приходить щовечора. Без обіцянок, яких ми не можемо дати. Просто голос, який дитина знає.</p></div></div>
-        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 15h13l3-5h2v5"/><path d="M3 15V8h10v7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div><div><h3>Далекобійники, моряки, вахтовики</h3><p>Дзвониш о пів на десяту, а малий уже заснув. Тепер він засинає під твій голос.</p></div></div>
+        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h3>Родини військових</h3><p>Тато чи мама на службі, а казка приходить щовечора. Без обіцянок, яких ми не можемо дати. Просто голос, який дитина знає.</p></div></div>
+        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 15h13l3-5h2v5"/><path d="M3 15V8h10v7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div><div><h3>Далекобійники, моряки, вахтовики</h3><p>Дзвониш о пів на десяту, а дитина вже заснула. Тепер вона засинає під твій голос.</p></div></div>
         <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></div><div><h3>Заробітчани й діаспора</h3><p>Мама в Польщі чи Німеччині, дитина з бабусею. Казка українською, її голосом, у звичний час.</p></div></div>
-        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div><div><h3>Батьки, що живуть окремо</h3><p>Твій вечір із дитиною навіть у не твій тиждень. Без дзвінків о дев'ятій, коли всі вже втомлені.</p></div></div>
+        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div><div><h3>Батьки, що живуть окремо</h3><p>Твій вечір із сином чи донькою навіть у не твій тиждень. Без дзвінків о дев'ятій, коли всі вже втомлені.</p></div></div>
       </div>
     </section>
 
@@ -287,7 +289,7 @@
       <div class="founder">
         <div class="avatar">М</div>
         <div>
-          <p>Я Максим. Ми будуємо «Поруч» удвох із другом-програмістом, власним коштом і відкрито: у каналі показуємо все, що виходить і що ні. Голос копіюємо тільки за згодою його власника. Це не заміна тата. Це спосіб бути поруч, коли не можеш бути.</p>
+          <p>Я Максим. Ми будуємо «Поруч» удвох із другом-програмістом, власним коштом і відкрито: у каналі показуємо все, що виходить і що ні. Голос копіюємо тільки за згодою його власника. Це не заміна мами чи тата. Це спосіб бути поруч, коли не можеш бути.</p>
           <div class="who">Максим, співзасновник «Поруч»</div>
         </div>
       </div>
@@ -297,7 +299,7 @@
       <h2 class="section-title">Питання, які ставлять найчастіше</h2>
       <div class="faq">
         <details><summary>Це безпечно — віддавати свій голос?</summary><p>Голос копіюється лише за згодою його власника і використовується тільки для казок вашій дитині. Видалити голос можна будь-коли однією кнопкою в боті, і ми його не зберігаємо далі.</p></details>
-        <details><summary>Чи не замінить це живого тата?</summary><p>Ні, і ми цього не хочемо. Найкраща казка — та, яку розповідають, обійнявши. «Поруч» для тих вечорів, коли обійняти неможливо: рейс, служба, кордон.</p></details>
+        <details><summary>Чи не замінить це живих батьків?</summary><p>Ні, і ми цього не хочемо. Найкраща казка — та, яку розповідають, обійнявши. «Поруч» для тих вечорів, коли обійняти неможливо: рейс, служба, кордон.</p></details>
         <details><summary>Скільки це коштує?</summary><p>Перші 500 родин отримують доступ безкоштовно. Далі буде підписка дешевша за одну дитячу книжку на місяць. Для родин військових плануємо безкоштовну лінію разом із фондами-партнерами.</p></details>
         <details><summary>Що потрібно, щоб почати?</summary><p>Telegram і дві хвилини, щоб записати голос. Жодних застосунків, реєстрацій чи карток.</p></details>
         <details><summary>Для якого віку казки?</summary><p>Від 2 до 10 років. Довжина, слова і сюжет підлаштовуються під вік, а казка знає імʼя дитини, що вона любить і чого боїться.</p></details>
@@ -319,6 +321,16 @@
   </div>
 
   <script>
+    (function () {
+      const el = document.querySelector('.rot');
+      if (!el) return;
+      const words = el.dataset.words.split('|');
+      let i = 0;
+      setInterval(() => {
+        el.classList.add('out');
+        setTimeout(() => { i = (i + 1) % words.length; el.textContent = words[i]; el.classList.remove('out'); }, 350);
+      }, 2600);
+    })();
     const wave = document.getElementById('wave');
     const heights = [30,55,40,70,45,85,60,35,75,50,90,40,65,30,80,55,45,70,35,60,50,85,40,65,30];
     heights.forEach((h, i) => { const b = document.createElement('i'); b.style.setProperty('--h', h + '%'); b.style.setProperty('--i', i); wave.appendChild(b); });
