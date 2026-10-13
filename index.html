@@ -2,65 +2,303 @@
 <html lang="uk">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Поруч — казки</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Поруч — казка голосом тата, який далеко</title>
+  <meta name="description" content="«Поруч» щовечора створює нову казку для вашої дитини і читає її голосом тата чи мами — навіть коли вони на службі, у рейсі чи за кордоном." />
+  <meta property="og:title" content="Поруч — казка голосом тата, який далеко" />
+  <meta property="og:description" content="Щовечора нова казка для вашої дитини голосом рідної людини. Перші 500 родин — безкоштовно." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0c18;
+      --bg-2: #121632;
+      --ink: #efece4;
+      --muted: #9a9db3;
+      --amber: #f5b544;
+      --amber-2: #ffd27a;
+      --card: rgba(255, 255, 255, 0.035);
+      --line: rgba(245, 181, 68, 0.16);
+      --max: 1080px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Manrope', system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .display { font-family: 'Unbounded', 'Manrope', sans-serif; font-weight: 700; letter-spacing: -0.01em; }
+    a { color: inherit; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+
+    /* ---------- sky ---------- */
+    .sky {
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(1200px 700px at 80% -10%, #2a2160 0%, transparent 60%),
+        radial-gradient(900px 600px at 10% 110%, #1b1a3d 0%, transparent 60%),
+        linear-gradient(180deg, #0a0c18 0%, #0e1124 60%, #0a0c18 100%);
+    }
+    .stars, .stars::after {
+      position: fixed; inset: 0; z-index: -1; content: '';
+      background-image:
+        radial-gradient(1.6px 1.6px at 12% 18%, #fff 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 28% 62%, #fff 50%, transparent 51%),
+        radial-gradient(1.8px 1.8px at 44% 30%, #ffe8b0 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 61% 74%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 73% 22%, #fff 50%, transparent 51%),
+        radial-gradient(1.1px 1.1px at 88% 56%, #ffe8b0 50%, transparent 51%),
+        radial-gradient(1.4px 1.4px at 93% 86%, #fff 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 6% 80%, #fff 50%, transparent 51%),
+        radial-gradient(1.3px 1.3px at 52% 92%, #fff 50%, transparent 51%),
+        radial-gradient(1.1px 1.1px at 36% 8%, #fff 50%, transparent 51%);
+      opacity: 0.55;
+      animation: twinkle 6s ease-in-out infinite;
+    }
+    .stars::after { transform: translate(37%, 23%) scale(1.3); opacity: 0.35; animation-delay: -3s; }
+    @keyframes twinkle { 0%, 100% { opacity: 0.55; } 50% { opacity: 0.25; } }
+
+    /* ---------- nav ---------- */
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: 'Unbounded'; font-weight: 700; font-size: 20px; }
+    .logo svg { width: 30px; height: 30px; }
+    .nav-cta { font-weight: 700; font-size: 15px; text-decoration: none; color: var(--amber); border: 1px solid var(--line); padding: 10px 16px; border-radius: 999px; }
+    .nav-cta:hover { background: rgba(245,181,68,0.08); }
+
+    /* ---------- hero ---------- */
+    .hero { padding: 56px 0 40px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; }
+    .kicker { color: var(--amber); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 12.5px; margin-bottom: 18px; }
+    h1 { font-size: clamp(34px, 5.2vw, 60px); line-height: 1.08; margin: 0 0 20px; }
+    h1 em { font-style: normal; color: var(--amber-2); }
+    .lead { font-size: clamp(17px, 1.6vw, 20px); color: #cfd0dc; max-width: 560px; margin: 0 0 30px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; padding: 15px 24px; border-radius: 999px; font-size: 16px; transition: transform .15s ease, box-shadow .15s ease; }
+    .btn-primary { background: linear-gradient(180deg, #ffd27a, #f5b544); color: #1a1407; box-shadow: 0 10px 40px rgba(245,181,68,0.28); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 50px rgba(245,181,68,0.4); }
+    .btn-ghost { border: 1px solid rgba(255,255,255,0.16); color: var(--ink); }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.35); }
+    .proof { margin-top: 18px; color: var(--muted); font-size: 14px; display: flex; gap: 8px; align-items: center; }
+    .proof .dot { width: 8px; height: 8px; border-radius: 50%; background: #5ddc8b; box-shadow: 0 0 12px #5ddc8b; }
+
+    .moon-wrap { position: relative; display: grid; place-items: center; min-height: 360px; }
+    .moon { width: min(340px, 70vw); filter: drop-shadow(0 0 60px rgba(245,181,68,0.35)); animation: float 7s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .whisper {
+      position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+      background: rgba(10,12,24,0.75); backdrop-filter: blur(10px);
+      border: 1px solid var(--line); border-radius: 16px; padding: 12px 16px;
+      font-size: 14px; color: #e6e3d8; white-space: nowrap;
+    }
+    .whisper b { color: var(--amber-2); }
+
+    /* ---------- sections ---------- */
+    section { padding: 64px 0; }
+    .section-title { font-size: clamp(26px, 3.4vw, 38px); line-height: 1.15; margin: 0 0 14px; }
+    .section-sub { color: var(--muted); max-width: 640px; margin: 0 0 36px; font-size: 17px; }
+
+    /* demo */
+    .demo-card { background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border: 1px solid var(--line); border-radius: 24px; padding: 28px; display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; }
+    .play { width: 76px; height: 76px; border-radius: 50%; border: 0; cursor: pointer; background: linear-gradient(180deg, #ffd27a, #f5b544); display: grid; place-items: center; box-shadow: 0 10px 40px rgba(245,181,68,0.35); transition: transform .15s; }
+    .play:hover { transform: scale(1.04); }
+    .play svg { width: 28px; height: 28px; fill: #1a1407; margin-left: 3px; }
+    .play.is-playing svg { margin-left: 0; }
+    .demo-title { font-family: 'Unbounded'; font-weight: 500; font-size: 18px; margin: 0 0 6px; }
+    .demo-meta { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+    .wave { display: flex; align-items: flex-end; gap: 3px; height: 36px; }
+    .wave i { display: block; width: 4px; border-radius: 2px; background: linear-gradient(180deg, #ffd27a, #b57a16); height: var(--h, 30%); opacity: .55; }
+    .is-playing .wave i { animation: bounce 1.1s ease-in-out infinite; animation-delay: calc(var(--i) * 0.06s); opacity: 1; }
+    @keyframes bounce { 0%, 100% { height: var(--h); } 50% { height: calc(var(--h) * 0.35 + 10%); } }
+    .time { color: var(--muted); font-size: 13px; margin-top: 8px; font-variant-numeric: tabular-nums; }
+    .demo-note { margin-top: 18px; color: #cfd0dc; font-size: 15px; }
+
+    /* steps */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .step { background: var(--card); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 26px 24px; }
+    .step .n { font-family: 'Unbounded'; color: var(--amber); font-size: 13px; letter-spacing: .1em; margin-bottom: 14px; }
+    .step h3 { font-size: 18px; margin: 0 0 8px; font-weight: 500; }
+    .step p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    /* audience */
+    .aud { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .aud-card { border-radius: 20px; padding: 24px; border: 1px solid rgba(255,255,255,0.07); background: var(--card); display: flex; gap: 16px; align-items: flex-start; }
+    .aud-card .ic { width: 44px; height: 44px; border-radius: 12px; flex: none; display: grid; place-items: center; background: rgba(245,181,68,0.1); border: 1px solid var(--line); }
+    .aud-card .ic svg { width: 22px; height: 22px; stroke: var(--amber-2); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .aud-card h3 { margin: 0 0 4px; font-size: 17px; font-weight: 500; }
+    .aud-card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    /* principle */
+    .principle { border-radius: 28px; padding: 48px 32px; text-align: center; border: 1px solid var(--line); background: radial-gradient(600px 300px at 50% 0%, rgba(245,181,68,0.12), transparent 70%), var(--card); }
+    .principle .display { font-size: clamp(24px, 3.6vw, 40px); line-height: 1.2; margin: 0 auto 16px; max-width: 760px; }
+    .principle p { color: #cfd0dc; max-width: 640px; margin: 0 auto; }
+    .pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 24px; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 14px; color: #e6e3d8; }
+
+    /* founder */
+    .founder { display: grid; grid-template-columns: 72px 1fr; gap: 20px; align-items: start; max-width: 720px; }
+    .avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #2a2160, #121632); border: 1px solid var(--line); display: grid; place-items: center; font-family: 'Unbounded'; font-weight: 700; color: var(--amber-2); }
+    .founder p { margin: 0 0 10px; color: #d8d6cc; }
+    .founder .who { color: var(--muted); font-size: 14px; }
+
+    /* final cta */
+    .final { text-align: center; padding: 80px 0 60px; }
+    .final h2 { font-size: clamp(28px, 4vw, 44px); margin: 0 0 14px; }
+    .final p { color: var(--muted); margin: 0 auto 26px; max-width: 560px; }
+
+    footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 28px 0 40px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--ink); }
+    .trust { font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 820px) {
+      .hero { grid-template-columns: 1fr; padding-top: 24px; }
+      .moon-wrap { min-height: 280px; order: -1; }
+      .moon { width: min(240px, 60vw); }
+      .steps, .aud { grid-template-columns: 1fr; }
+      .demo-card { grid-template-columns: 1fr; text-align: left; }
+      section { padding: 48px 0; }
+      .whisper { white-space: normal; text-align: center; width: 86%; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Library: list of recent stories -->
-  <main id="library" class="view">
-    <header class="app-header">
-      <div class="app-title">🌙 Поруч</div>
-      <div class="app-subtitle">Казки вашим голосом</div>
-    </header>
-    <section class="story-list" id="story-list"></section>
-  </main>
+  <div class="sky"></div>
+  <div class="stars"></div>
 
-  <!-- Reader: comfortable full-screen reading -->
-  <main id="reader" class="view" hidden>
-    <header class="reader-bar">
-      <div class="reader-bar-row">
-        <button class="bar-btn" id="back-btn" aria-label="Назад">←</button>
-        <div class="font-controls">
-          <button class="bar-btn" id="font-minus" aria-label="Менший шрифт">A−</button>
-          <button class="bar-btn" id="font-plus" aria-label="Більший шрифт">A+</button>
-          <button class="bar-btn" id="settings-btn" aria-label="Вигляд">Аа</button>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#f5b544"/></linearGradient></defs><path d="M30 6a18 18 0 1 0 12 31.5A14 14 0 1 1 30 6z" fill="url(#g1)"/><path d="M12 13l1.4 3.2L16.6 17.6l-3.2 1.4L12 22.2l-1.4-3.2L7.4 17.6l3.2-1.4z" fill="#efece4"/></svg>
+        Поруч
+      </a>
+      <a class="nav-cta" href="https://t.me/+__FWYzw4QDE1MWI0" target="_blank" rel="noopener">Ранній доступ</a>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <div class="kicker">Казки голосом рідних · для родин на відстані</div>
+        <h1>Тато далеко.<br />Казка — <em>його голосом.</em></h1>
+        <p class="lead">«Поруч» щовечора створює нову казку для вашої дитини і читає її голосом тата чи мами, навіть коли вони на службі, у рейсі чи за кордоном.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://t.me/+__FWYzw4QDE1MWI0" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L3 10.5l7.5 3L13.5 21z"/></svg>
+            Хочу ранній доступ
+          </a>
+          <a class="btn btn-ghost" href="#demo">Послухати, як це звучить</a>
+        </div>
+        <div class="proof"><span class="dot"></span> Перші 500 родин отримують доступ безкоштовно</div>
+      </div>
+      <div class="moon-wrap">
+        <svg class="moon" viewBox="0 0 400 400" aria-hidden="true">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f5b544" stop-opacity=".35"/><stop offset="1" stop-color="#f5b544" stop-opacity="0"/></radialGradient>
+            <linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe09a"/><stop offset="1" stop-color="#e9a62f"/></linearGradient>
+          </defs>
+          <circle cx="200" cy="200" r="190" fill="url(#glow)"/>
+          <path d="M240 60a140 140 0 1 0 92 245A110 110 0 1 1 240 60z" fill="url(#mg)"/>
+          <circle cx="262" cy="150" r="9" fill="#d9952a" opacity=".35"/>
+          <circle cx="300" cy="215" r="14" fill="#d9952a" opacity=".3"/>
+          <circle cx="255" cy="268" r="7" fill="#d9952a" opacity=".3"/>
+          <path d="M96 96l5 11 11 5-11 5-5 11-5-11-11-5 11-5z" fill="#efece4"/>
+          <path d="M70 300l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#efece4" opacity=".8"/>
+        </svg>
+        <div class="whisper">«Спи спокійно, мій любий сину. <b>Я поруч.</b>»</div>
+      </div>
+    </header>
+
+    <section id="demo">
+      <h2 class="section-title">Ось так це звучить</h2>
+      <p class="section-sub">Голос у записі — справжнього тата, скопійований із двохвилинного запису. Казка написана для хлопчика шести років, який любить мотоцикли й боїться темряви.</p>
+      <div class="demo-card" id="demo-card">
+        <button class="play" id="play" aria-label="Відтворити демо">
+          <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+        </button>
+        <div>
+          <p class="demo-title">Тихі стежки під зорями</p>
+          <p class="demo-meta">Заспокійлива казка · 2 хв 25 с · голос тата + тиха колискова</p>
+          <div class="wave" id="wave"></div>
+          <div class="time"><span id="cur">0:00</span> / <span id="dur">2:25</span></div>
         </div>
       </div>
-      <div class="reader-settings" id="reader-settings" hidden>
-        <div class="settings-row">
-          <span class="settings-label">Тема</span>
-          <div class="theme-buttons">
-            <button class="theme-btn theme-btn-night" data-theme="night" aria-label="Нічна тема">🌙</button>
-            <button class="theme-btn theme-btn-sepia" data-theme="sepia" aria-label="Сепія">📜</button>
-            <button class="theme-btn theme-btn-day" data-theme="day" aria-label="Денна тема">☀️</button>
-          </div>
-        </div>
-        <div class="settings-row">
-          <span class="settings-label">Освітлення</span>
-          <input type="range" id="brightness" min="55" max="100" step="5" aria-label="Яскравість" />
-        </div>
-        <div class="settings-row">
-          <span class="settings-label">Інтервал</span>
-          <div class="theme-buttons">
-            <button class="bar-btn" id="line-tight" aria-label="Щільніше">▭</button>
-            <button class="bar-btn" id="line-loose" aria-label="Просторіше">☰</button>
-          </div>
+      <p class="demo-note">Дослухайте до кінця: страх темряви в цій казці ніхто не перемагає. Світлячки, зорі, молоко на ніч, і тато, який каже «я поруч».</p>
+      <audio id="audio" preload="none" src="demo/tyhi-stezhky.wav"></audio>
+    </section>
+
+    <section>
+      <h2 class="section-title">Три кроки, і казка щовечора</h2>
+      <p class="section-sub">Усе відбувається в Telegram. Жодних застосунків, які треба ставити бабусі.</p>
+      <div class="steps">
+        <div class="step"><div class="n">КРОК 1</div><h3>Запишіть дві хвилини голосу</h3><p>Прочитайте короткий текст, як читали б дитині. Так, як є: з диханням, з усмішкою, без дикторства.</p></div>
+        <div class="step"><div class="n">КРОК 2</div><h3>Розкажіть про дитину</h3><p>Ім'я, вік, як кличуть удома. Що любить, чого боїться, що скоро чекає: садочок, лікар, переїзд.</p></div>
+        <div class="step"><div class="n">КРОК 3</div><h3>Щовечора нова казка</h3><p>За хвилину приходить текст і озвучка вашим голосом. Дитина чує тата. Тато знає, що був поруч.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Для кого ми це робимо</h2>
+      <p class="section-sub">Для всіх, у кого вечірня казка стала рідкістю не з власної волі.</p>
+      <div class="aud">
+        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h3>Родини військових</h3><p>Тато на службі, а казка приходить щовечора. Без обіцянок, яких ми не можемо дати. Просто голос, який дитина знає.</p></div></div>
+        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 15h13l3-5h2v5"/><path d="M3 15V8h10v7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div><div><h3>Далекобійники, моряки, вахтовики</h3><p>Дзвониш о пів на десяту, а малий уже заснув. Тепер він засинає під твій голос.</p></div></div>
+        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></div><div><h3>Заробітчани й діаспора</h3><p>Мама в Польщі чи Німеччині, дитина з бабусею. Казка українською, її голосом, у звичний час.</p></div></div>
+        <div class="aud-card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div><div><h3>Батьки, що живуть окремо</h3><p>Твій вечір із дитиною навіть у не твій тиждень. Без дзвінків о дев'ятій, коли всі вже втомлені.</p></div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="principle">
+        <div class="display">Страх у наших казках не перемагають.<br />Його приручають.</div>
+        <p>Кожна казка має мету, яку обираєте ви: відзначити сильну сторону дитини, м'яко пройти через страх темряви чи лікаря, підготувати до першого дня в садочку або просто заспокоїти після важкого дня.</p>
+        <div class="pills"><span class="pill">💪 Сильні сторони</span><span class="pill">🌙 Лагідно про страх</span><span class="pill">🎒 Підготовка до події</span><span class="pill">😴 Заспокоїтися</span><span class="pill">🚀 Просто пригода</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="founder">
+        <div class="avatar">М</div>
+        <div>
+          <p>Я Максим. Ми будуємо «Поруч» удвох із другом-програмістом, власним коштом і відкрито: у каналі показуємо все, що виходить і що ні. Голос копіюємо тільки за згодою його власника. Це не заміна тата. Це спосіб бути поруч, коли не можеш бути.</p>
+          <div class="who">Максим, співзасновник «Поруч»</div>
         </div>
       </div>
-    </header>
-    <div class="dim-overlay" id="dim-overlay"></div>
-    <article class="story">
-      <h1 id="story-title"></h1>
-      <div class="story-meta" id="story-meta"></div>
-      <div id="story-text"></div>
-      <footer class="story-footer">
-        <div class="brand-line">Я поруч. Добраніч 🌙</div>
-      </footer>
-    </article>
-  </main>
+    </section>
 
-  <script src="app.js"></script>
+    <section class="final">
+      <h2>Перші 500 родин — безкоштовно</h2>
+      <p>Підпишіться на канал: там ранній доступ, нові казки й усе, що ми робимо день за днем.</p>
+      <a class="btn btn-primary" href="https://t.me/+__FWYzw4QDE1MWI0" target="_blank" rel="noopener">Долучитися в Telegram</a>
+      <div class="trust" style="margin-top:16px">Безкоштовна лінія для родин військових — у планах, разом із фондами-партнерами.</div>
+    </section>
+
+    <footer>
+      <div>© Поруч · зв'язок, а не заміна</div>
+      <div style="display:flex;gap:18px"><a href="https://t.me/+__FWYzw4QDE1MWI0" target="_blank" rel="noopener">Telegram-канал</a><a href="app/">Читалка (демо)</a></div>
+    </footer>
+  </div>
+
+  <script>
+    const wave = document.getElementById('wave');
+    const heights = [30,55,40,70,45,85,60,35,75,50,90,40,65,30,80,55,45,70,35,60,50,85,40,65,30];
+    heights.forEach((h, i) => { const b = document.createElement('i'); b.style.setProperty('--h', h + '%'); b.style.setProperty('--i', i); wave.appendChild(b); });
+    const audio = document.getElementById('audio');
+    const btn = document.getElementById('play');
+    const card = document.getElementById('demo-card');
+    const ip = document.getElementById('icon-play'), ipa = document.getElementById('icon-pause');
+    const cur = document.getElementById('cur'), dur = document.getElementById('dur');
+    const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+    btn.addEventListener('click', () => { if (audio.paused) audio.play(); else audio.pause(); });
+    audio.addEventListener('play', () => { card.classList.add('is-playing'); btn.classList.add('is-playing'); ip.style.display = 'none'; ipa.style.display = ''; });
+    audio.addEventListener('pause', () => { card.classList.remove('is-playing'); btn.classList.remove('is-playing'); ip.style.display = ''; ipa.style.display = 'none'; });
+    audio.addEventListener('timeupdate', () => { cur.textContent = fmt(audio.currentTime); });
+    audio.addEventListener('loadedmetadata', () => { dur.textContent = fmt(audio.duration); });
+  </script>
 </body>
 </html>
